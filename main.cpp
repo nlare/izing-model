@@ -36,12 +36,6 @@ int main(int argc, char *argv[])    {
     cout << "OpenMP is not support!" << endl;
 #endif
 
-    // TwoDimIzingModel.set_streams(1);
-   // TwoDimIzingModel.set_temperature_range(3.0, 2.35);
-    // TwoDimIzingModel.set_temperature_static(3.5, 3.0, 2.5, 2.261);
-    // TwoDimIzingModel.set_temperature_static(2.5);
-    // TwoDimIzingModel.set_method("W");
-
     Model.setStreams(4);
     // Model.SetTemperatureStatic(4.3, 4.51, 4.7, 5.0);
     Model.setTemperatureRange(4.0, 5.0, 4.41, 4.6);
