@@ -43,7 +43,6 @@ int main(int argc, char *argv[])    {
 
     omp_time_start = omp_get_wtime();
 
-    // TwoDimIzingModel.start();
     if(!Model.Start())  {
         cerr << "Cannot start meshuring..." << endl;
     }
