@@ -167,7 +167,7 @@ void Izing3D::magnetic(int thread_num)     {
     data[thread_num].magnet = abs(data[thread_num].magnetic_per_spin/(N*N*N));
 }
 
-void Izing3D::SetTemperatureRange(double _T_min, double _T_max, double _T_dr1, double _T_dr2) {
+void Izing3D::setTemperatureRange(double _T_min, double _T_max, double _T_dr1, double _T_dr2) {
 
     struct step_t {
         float little;
@@ -215,7 +215,7 @@ void Izing3D::SetTemperatureRange(double _T_min, double _T_max, double _T_dr1, d
     T_div_max_index = i;
 }
 
-void Izing3D::SetTemperatureRange(double _T_min, double _T_max) {
+void Izing3D::setTemperatureRange(double _T_min, double _T_max) {
 
     struct step_t {
         float big;
@@ -244,13 +244,13 @@ void Izing3D::SetTemperatureRange(double _T_min, double _T_max) {
     T_div_max_index = i;
 }
 
-void Izing3D::SetTemperatureStatic(double _T)	{
+void Izing3D::setTemperatureStatic(double _T)	{
 	static_temp = true;
     T_div_max_index = 1;
 	T_div[0] = _T;
 }
 
-void Izing3D::SetTemperatureStatic(double _T1, double _T2, double _T3, double _T4)	{
+void Izing3D::setTemperatureStatic(double _T1, double _T2, double _T3, double _T4)	{
 	static_temp = true;
 	static_procs_parallel = true;
 	T_div[0] = _T1;
@@ -261,11 +261,11 @@ void Izing3D::SetTemperatureStatic(double _T1, double _T2, double _T3, double _T
 	static_procs_count = 4;
 }
 
-void Izing3D::SetMethod(string _name)  {
+void Izing3D::setMethod(string _name)  {
     algorithm = _name;
 }
 
-void Izing3D::SetStreams(int _streams)	{
+void Izing3D::setStreams(int _streams)	{
 	streams = _streams;
 }
 
@@ -1392,7 +1392,7 @@ void Izing3D::WolfMassiveBased(double _T)   {
 
             spin[ci][cj][ck] = -spin[ci][cj][ck]; /* Инвертируем спин */
 
-            // SetStreams(1);
+            // setStreams(1);
 
             // cout << "streams=" << streams << endl;
 
@@ -1949,7 +1949,7 @@ int Izing3D::Start()    {
     }
 
     if(strcmp("WM", algorithm.c_str()) == 0)   {
-        // SetStreams(2);
+        // setStreams(2);
         // #pragma omp parallel for num_threads(streams)
         for(int i = 0; i < T_div_max_index; i++)   {
             // #pragma omp critical    

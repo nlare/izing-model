@@ -14,23 +14,23 @@ class Izing3D: public Models  {
     public:
         Izing3D(string _name, int _grid_size, int _mks_max, int _statistic);
         ~Izing3D(void);
-        void ShowCharacteristicOfModel();
-        void FormSourceConf(); // здесь формируем начальную конфигурацию спинов
-        void SetTemperatureRange(double, double, double, double);
-        void SetTemperatureRange(double, double);
-        void SetTemperatureStatic(double);
-        void SetTemperatureStatic(double, double, double, double);
-        void SetStreams(int);
-        void SetMethod(string);
 
-        void WriteRelax();
+        void setTemperatureRange(double, double, double, double);
+        void setTemperatureRange(double, double);
+        void setTemperatureStatic(double);
+        void setTemperatureStatic(double, double, double, double);
+        void setStreams(int);
+        void setMethod(string);
+
+        // void WriteRelax();
+        void ShowCharacteristicOfModel();
+        void FormSourceConf();
         void WriteTdCharToFile();
 
         // void Relaxation(int);
         void SaveSpinConf(int);
         // void ACF(int);
-
-        void StatisticProcessing();
+        // void StatisticProcessing();
 
         void Metropolis(double);
         void SwendsenWang(double);

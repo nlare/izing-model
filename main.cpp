@@ -30,7 +30,7 @@ int main(int argc, char *argv[])    {
 
     // Izing2D Model("Izing2D", 16, 1000, 100);
     //params - name, grid_size, mcs_max, statistic
-    Izing3D Model("Izing3D", 64, 1000, 25);
+    Izing3D Model("Izing3D", 16, 1000, 25);
 
 #ifndef _OPENMP
     cout << "OpenMP is not support!" << endl;
@@ -42,10 +42,10 @@ int main(int argc, char *argv[])    {
     // TwoDimIzingModel.set_temperature_static(2.5);
     // TwoDimIzingModel.set_method("W");
 
-    Model.SetStreams(4);
+    Model.setStreams(4);
     // Model.SetTemperatureStatic(4.3, 4.51, 4.7, 5.0);
-    Model.SetTemperatureRange(4.0, 5.0, 4.41, 4.6);
-    Model.SetMethod("M"); //
+    Model.setTemperatureRange(4.0, 5.0, 4.41, 4.6);
+    Model.setMethod("M"); //
 
     omp_time_start = omp_get_wtime();
 
