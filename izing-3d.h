@@ -73,7 +73,7 @@ class Izing3D: public Models  {
                 magnetic_per_spin = 0.0;
             }
 
-        } data[8];
+        } data[10];
 
         struct _statistic_t {
 
@@ -86,7 +86,7 @@ class Izing3D: public Models  {
             double error_relax[2]; // 0 element - delta = (<mcs^2> - <mcs>^2)^1/2, 1 element - <mcs^2>, 2 element - <mcs>^2
             double error_correlation[2]; // 0 element - delta = (<mcs^2> - <mcs>^2)^1/2, 1 element - <mcs^2>, 2 element - <mcs>^2
 
-        } statistic[8];
+        } statistic[10];
 
         struct trigger_t {
             bool correlation;
@@ -98,7 +98,7 @@ class Izing3D: public Models  {
                 relax_print = true;
                 relax = true;
             }
-        }   trigger[8];
+        }   trigger[10];
 
         string algorithm;
 
