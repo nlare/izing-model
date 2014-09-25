@@ -36,7 +36,7 @@ int main(int argc, char *argv[])    {
     cout << "OpenMP is not support!" << endl;
 #endif
 
-    Model.setStreams(4);
+    Model.setStreams(1);
     // Model.setTemperatureStatic(4.3, 4.51, 4.7, 5.0);
     Model.setTemperatureRange(4.0, 5.0, 4.41, 4.6);
     Model.setMethod("M"); //
