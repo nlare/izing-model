@@ -903,6 +903,7 @@ void Izing3D::WolfStackBased(double _T)   {
 
     omp_set_num_threads(streams);
 
+
     #pragma omp parallel for schedule(static,1) private(element_i,element_j,element_k,ci,cj,ck,r,W)
     for(int start_conf = 0; start_conf < statistic_max; start_conf++)   {
 
@@ -1263,8 +1264,7 @@ void Izing3D::WolfMassiveBased(double _T)   {
     } times[streams];
 
     struct _checked_spin   {
-//      int i;  // i coordinate
-//      int j;  // j coordinate
+
         bool with_defect; // Спин уже, добавленный в кластер
 
         _checked_spin()    {
@@ -1275,16 +1275,6 @@ void Izing3D::WolfMassiveBased(double _T)   {
             with_defect = false;
         }
     } checked_spin[N][N][N];
-
-    // struct _count   {
-
-    //     int i;
-    //     int j;
-    //     int k;
-
-    //     int number;
-
-    // } cluster[N*N*N];
 
     struct _spin_in_cluster  {
         int i;
