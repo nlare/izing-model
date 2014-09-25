@@ -1374,17 +1374,9 @@ void Izing3D::WolfMassiveBased(double _T)   {
 
             // central = spin[ci][cj];
 
-            // element_i.push(ci);
-            // element_j.push(cj);
-            // element_k.push(ck);
-
             n_cl = 1;
 
             spin[ci][cj][ck] = -spin[ci][cj][ck]; /* Инвертируем спин */
-
-            // setStreams(1);
-
-            // cout << "streams=" << streams << endl;
 
             omp_set_num_threads(streams);
 
