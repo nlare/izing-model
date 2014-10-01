@@ -357,7 +357,7 @@ void Izing3D::WriteTdCharToFile()   {
 
     buff.str("");
 
-    buff << "result/" << algorithm << "-APPR-3D-" << N << "-" << statistic_max << ".DAT";
+    buff << "result/" << algorithm << "-APPR-3D-" << N << "-" << statistic_max << "-THR-" << streams << ".DAT";
 
     cout << "Write to " << buff.str() << " ..." << endl;
 
@@ -365,16 +365,14 @@ void Izing3D::WriteTdCharToFile()   {
 
     strcpy(name_appr, buff.str().c_str());
 
-    if(remove(name_appr)!=0)  {
-        remove_appr = false;
-    }
+    // if(remove(name_appr)!=0)  {
+    //     remove_appr = false;
+    // }
 
     out_appr.open(name_appr, ios::app);
 
-    delete name_appr;
-
     if(out_appr.bad())   {
-        cerr << "Cannot open APPR.DAT!" << endl;
+        cerr << "Cannot open " << name_appr << ", check permissions" << endl;
     }
     out_appr.precision(4);
 
@@ -420,7 +418,9 @@ void Izing3D::WriteTdCharToFile()   {
                     relax << setw(10) << error_relax << setw(10) << correlation << setw(10) << \
                     error_correlation << setw(10) << T << endl;
 
-    }   else cerr << "Cannot open \"" << name_appr << "\", use OpenRelaxFile func previously or check permissions" << endl;
+    }   else cerr << "Cannot open \"" << name_appr << "\", check permissions" << endl;
+
+    delete name_appr;
 
     out_appr.close();
 }
@@ -1282,10 +1282,6 @@ void Izing3D::WolfMassiveBased(double _T)   {
         int k;
     } spin_in_cluster;
 
-    stack <int> element_i;
-    stack <int> element_j;
-    stack <int> element_k;
-
     srand(time(NULL));
 
     W = 1.0 - exp(-2.0/_T);
@@ -1295,6 +1291,8 @@ void Izing3D::WolfMassiveBased(double _T)   {
     cout << "W = " << W << endl;
 
     FormSourceConf();
+
+    // CRandomMersenne Mersenne(361876);
 
     // for(int i=0;i<N;i++)    {
     //     for(int j=0;j<N;j++)    {
@@ -1344,16 +1342,15 @@ void Izing3D::WolfMassiveBased(double _T)   {
 
         for(int mcs = 0; mcs < mcs_max; mcs++)  {
 
-            for(int f = 0; f < flip_max; f++)   {
+        for(int f = 0; f < flip_max; f++)   {
 
-            // for(int i = 0; i < N; i++)  {
-            //     for(int j = 0; j < N; j++)  {
-            //         for(int k = 0; k < N; k++)  {
-            //             checked_spins[i][j][k].clear();
-            //         }
-            //     }
-            // }
-
+            for(int i = 0; i < N; i++)  {
+                for(int j = 0; j < N; j++)  {
+                    for(int k = 0; k < N; k++)  {
+                        checked_spin[i][j][k].with_defect = false;
+                    }
+                }
+            }
 
             seed = 1 + rand() % 1000;
 
@@ -1378,8 +1375,6 @@ void Izing3D::WolfMassiveBased(double _T)   {
 
             spin[ci][cj][ck] = -spin[ci][cj][ck]; /* Инвертируем спин */
 
-            omp_set_num_threads(streams);
-
             do {
 
                 if(n_cl == 0 || n_cl > N*N-2)  {
@@ -1396,13 +1391,15 @@ void Izing3D::WolfMassiveBased(double _T)   {
                     // {
                         // cout << "omp_get_num_threads = " << omp_get_num_threads() << endl;
                     // #pragma omp master
-                    {
+                    // {
                         n_cl--;
+
+                        cout << cluster[n_cl][0] << "," << cluster[n_cl][1] << "," << cluster[n_cl][2] << endl; 
 
                         ci = cluster[n_cl][0];
                         cj = cluster[n_cl][1];
                         ck = cluster[n_cl][2];
-                    }
+                    // }
                             // ci = element_i.top();
                             // cj = element_j.top();
                             // ck = element_k.top();
@@ -1655,14 +1652,23 @@ void Izing3D::WolfMassiveBased(double _T)   {
                     // cluster_size[0] = element_i.size();
                     // #pragma omp critical
                     // {
-                        // cout << "cluster_size = " << element_i.size() << endl;
+                        cout << "cluster_size = " << n_cl << endl;
                     // }
 
             // } // omp parallel       
 
             } while(1);
 
-        }
+
+            // for(int i = 0; i < N; i++)  {
+            //     for(int j = 0; j < N; j++)  {
+            //         for(int k = 0; k < N; k++)  {
+            //             
+            //         }
+            //     }
+            // }
+
+        }   // for(flip)
 
         // cout << "while end" << endl;
 

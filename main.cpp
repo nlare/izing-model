@@ -30,14 +30,14 @@ int main(int argc, char *argv[])    {
 
     // Izing2D Model("Izing2D", 16, 1000, 100);
     //params - name, grid_size, mcs_max, statistic
-    Izing3D Model("Izing3D", 16, 1000, 25);
+    Izing3D Model("Izing3D", 16, 1000, 10);
 
 #ifndef _OPENMP
     cout << "OpenMP is not support!" << endl;
 #endif
 
-    Model.setStreams(1);
-    // Model.setTemperatureStatic(4.3, 4.51, 4.7, 5.0);
+    Model.setStreams(2);
+    // Model.setTemperatureStatic(4.3, 4.5, 4.7, 4.9);
     Model.setTemperatureRange(4.0, 5.0, 4.41, 4.6);
     Model.setMethod("M"); //
 
